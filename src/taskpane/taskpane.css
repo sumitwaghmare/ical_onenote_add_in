@@ -1,0 +1,576 @@
+/*
+ * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+ * See LICENSE in the project root for license information.
+ */
+
+/* ==========================================================================
+   Taskpane UI Styles (Clean, Premium, Modern UI)
+   ========================================================================== */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f2f1;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    color: #323130;
+}
+
+.body-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.taskpane-ui {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.ui-header {
+    background: linear-gradient(135deg, #7b3b8c, #4a154b);
+    color: white;
+    padding: 20px 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ui-title {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.ui-subtitle {
+    margin: 4px 0 0 0;
+    font-size: 11px;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Nav Tabs */
+.ui-nav {
+    display: flex;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.nav-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 12px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #605e5c;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.nav-tab:hover {
+    color: #4a154b;
+    background-color: #f8f8f8;
+}
+
+.nav-tab.active {
+    color: #4a154b;
+    border-bottom-color: #7b3b8c;
+}
+
+/* Tab Contents */
+.tab-content {
+    display: none;
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.tab-content.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form Controls */
+.control-group {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ms-Label {
+    font-weight: 600;
+    font-size: 13px;
+    color: #323130;
+    margin-bottom: 6px;
+}
+
+.date-input-container {
+    position: relative;
+}
+
+.date-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #a19f9d;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.date-input:focus {
+    border-color: #7b3b8c;
+}
+
+.text-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #a19f9d;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: inherit;
+    box-sizing: border-box;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+}
+
+.text-input:focus {
+    border-color: #7b3b8c;
+}
+
+.help-text {
+    font-size: 11px;
+    color: #605e5c;
+    margin-top: 4px;
+}
+
+/* Buttons */
+.action-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.primary-btn {
+    background-color: #7b3b8c;
+    color: white;
+    box-shadow: 0 2px 4px rgba(123, 59, 140, 0.2);
+}
+
+.primary-btn:hover {
+    background-color: #632d72;
+    box-shadow: 0 4px 8px rgba(123, 59, 140, 0.3);
+}
+
+.secondary-btn {
+    background-color: #f3f2f1;
+    color: #323130;
+    border: 1px solid #8a8886;
+}
+
+.secondary-btn:hover {
+    background-color: #edebe9;
+}
+
+.btn-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Status Log */
+.status-container {
+    margin-top: 20px;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.status-title {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #605e5c;
+}
+
+.status-log {
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    max-height: 150px;
+    overflow-y: auto;
+    line-height: 1.5;
+}
+
+.log-item {
+    margin-bottom: 4px;
+}
+
+.log-item.info { color: #0078d4; }
+.log-item.success { color: #107c41; font-weight: bold; }
+.log-item.error { color: #a80000; font-weight: bold; }
+
+.settings-intro {
+    font-size: 12px;
+    color: #605e5c;
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
+
+.settings-status {
+    margin-top: 12px;
+    padding: 8px;
+    background-color: #dff6dd;
+    color: #107c41;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* ==========================================================================
+   Planner Rendering Wrapper (Off-screen Container)
+   ========================================================================== */
+.planner-render-wrapper {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 595px;
+    height: 842px;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   A5 Planner Page Styles (148mm x 210mm scaled to 595px x 842px)
+   ========================================================================== */
+.planner-a5-page {
+    width: 595px;
+    height: 842px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    padding: 20px;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    color: #000000;
+}
+
+.planner-border {
+    border: 1px solid #000000;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.planner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 70px;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.tmpl-date-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+}
+
+.tmpl-day-subtitle {
+    font-size: 14px;
+    color: #595959;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.header-right {
+    display: flex;
+    gap: 12px;
+}
+
+.mini-cal-box {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mini-cal-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+}
+
+.mini-cal-grid-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 6px;
+    font-weight: 700;
+    color: #595959;
+    margin-bottom: 2px;
+}
+
+.mini-cal-grid-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 2px;
+    font-size: 6.5px;
+    text-align: center;
+    color: #000000;
+}
+
+.mini-cal-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8px;
+    box-sizing: border-box;
+}
+
+.mini-cal-day.today {
+    border: 1px solid #000000;
+    border-radius: 2px;
+    font-weight: 700;
+}
+
+.mini-cal-day.other-month {
+    color: #bfbfbf;
+}
+
+/* Main Divider */
+.planner-main-divider {
+    border-top: 2.2px solid #000000;
+    margin: 8px 0;
+}
+
+/* Content Area */
+.planner-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Left Column: Schedule */
+.content-left-schedule {
+    width: 58%;
+    border-right: 1.2px solid #000000;
+    padding-right: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.schedule-grid {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.schedule-row {
+    display: flex;
+    height: 29px;
+    border-bottom: 0.8px solid #cccccc;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.hour-label {
+    width: 32px;
+    font-size: 9px;
+    font-weight: 700;
+    text-align: right;
+    padding-right: 8px;
+    box-sizing: border-box;
+}
+
+.hour-label .ampm {
+    font-size: 5.5px;
+    font-weight: 500;
+    color: #595959;
+    vertical-align: super;
+}
+
+.hour-line {
+    border-left: 0.8px solid #cccccc;
+    height: 100%;
+}
+
+.hour-content {
+    flex: 1;
+    height: 100%;
+    padding-left: 6px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.schedule-event {
+    background-color: #f3f2f1;
+    border-left: 2.5px solid #7b3b8c;
+    font-size: 7.5px;
+    line-height: 1.2;
+    padding: 2px 4px;
+    border-radius: 1px;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.schedule-extra-line {
+    height: 29px;
+    border-bottom: 0.8px solid #cccccc;
+    margin-left: 32px;
+}
+
+/* Right Column: Boxes */
+.content-right-boxes {
+    width: 42%;
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.planner-box {
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+.box-header {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 1px solid #000000;
+    padding: 4px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.task-box {
+    flex: 1.4;
+}
+
+.task-arrange-by {
+    font-size: 8px;
+    font-style: italic;
+    color: #595959;
+    padding: 4px 8px 2px 8px;
+}
+
+.task-list-container {
+    padding: 2px 8px 8px 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.task-item {
+    display: flex;
+    align-items: flex-start;
+}
+
+.task-checkbox {
+    width: 8px;
+    height: 8px;
+    border: 0.8px solid #000000;
+    margin-right: 6px;
+    margin-top: 1.5px;
+    flex-shrink: 0;
+}
+
+.task-text {
+    font-size: 8.5px;
+    line-height: 1.2;
+    color: #000000;
+    word-break: break-all;
+}
+
+.notes-box {
+    flex: 1;
+}
+
+.notes-ruled-lines {
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.note-ruled-line {
+    border-bottom: 0.8px solid #cccccc;
+    height: 18px;
+}
+
+/* Footer */
+.planner-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20px;
+    font-size: 7px;
+    color: #595959;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.footer-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8px;
+    color: #000000;
+}

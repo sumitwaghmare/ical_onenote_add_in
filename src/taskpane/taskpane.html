@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OneNote Daily Planner Background Generator</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+
+    <!-- Fluent UI (Fabric) styling -->
+    <link rel="stylesheet" href="https://res-1.cdn.office.net/files/fabric-cdn-prod_20230815.002/office-ui-fabric-core/11.1.0/css/fabric.min.css"/>
+    
+    <!-- Google Fonts for premium typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Template styles -->
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="ms-font-m ms-Fabric body-container">
+    <!-- Main Taskpane UI -->
+    <div class="taskpane-ui">
+        <header class="ui-header">
+            <h1 class="ui-title">Daily Planner</h1>
+            <p class="ui-subtitle">A5 Template Generator</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="ui-nav">
+            <button id="tab-btn-planner" class="nav-tab active">Planner</button>
+            <button id="tab-btn-settings" class="nav-tab">Settings</button>
+        </nav>
+
+        <!-- Planner Tab Content -->
+        <div id="tab-content-planner" class="tab-content active">
+            <div class="control-group">
+                <label for="planner-date" class="ms-Label">Planner Date</label>
+                <div class="date-input-container">
+                    <input type="date" id="planner-date" class="date-input">
+                </div>
+            </div>
+
+            <button id="btn-generate" class="action-btn primary-btn">
+                <span class="btn-text">Generate & Insert Planner</span>
+                <span class="btn-spinner" style="display: none;"></span>
+            </button>
+
+            <div id="status-container" class="status-container" style="display: none;">
+                <h3 class="status-title">Status Log</h3>
+                <div id="status-log" class="status-log"></div>
+            </div>
+        </div>
+
+        <!-- Settings Tab Content -->
+        <div id="tab-content-settings" class="tab-content">
+            <p class="settings-intro">Configure your API credentials to automatically source events and tasks.</p>
+            
+            <div class="control-group">
+                <label for="setting-ical" class="ms-Label">Outlook iCal URL</label>
+                <textarea id="setting-ical" class="text-input" rows="3" placeholder="https://outlook.office365.com/.../calendar.ics"></textarea>
+                <span class="help-text">Outlook web calendar shared ICS link</span>
+            </div>
+
+            <div class="control-group">
+                <label for="setting-todoist" class="ms-Label">Todoist API Token</label>
+                <input type="password" id="setting-todoist" class="text-input" placeholder="Enter Todoist API Token">
+                <span class="help-text">Settings > Integrations > Developer > API token</span>
+            </div>
+
+            <button id="btn-save-settings" class="action-btn secondary-btn">Save Settings</button>
+            
+            <div id="settings-status" class="settings-status" style="display: none;">Settings saved successfully!</div>
+        </div>
+    </div>
+
+    <!-- Hashed/Hidden A5 Planner Template (Used by html2canvas to render the background image) -->
+    <div class="planner-render-wrapper">
+        <div id="planner-template" class="planner-a5-page">
+            <div class="planner-border">
+                
+                <!-- Header: Date Title and Mini Calendars -->
+                <div class="planner-header">
+                    <div class="header-left">
+                        <div id="tmpl-date" class="tmpl-date-title">August 3, 2026</div>
+                        <div id="tmpl-day" class="tmpl-day-subtitle">Monday</div>
+                    </div>
+                    <div class="header-right">
+                        <!-- Mini Calendar 1: Current Month -->
+                        <div class="mini-cal-box">
+                            <div id="tmpl-cal1-title" class="mini-cal-title">August 2026</div>
+                            <div class="mini-cal-grid-header">
+                                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                            </div>
+                            <div id="tmpl-cal1-days" class="mini-cal-grid-days">
+                                <!-- Generated Dynamically -->
+                            </div>
+                        </div>
+                        <!-- Mini Calendar 2: Next Month -->
+                        <div class="mini-cal-box">
+                            <div id="tmpl-cal2-title" class="mini-cal-title">September 2026</div>
+                            <div class="mini-cal-grid-header">
+                                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                            </div>
+                            <div id="tmpl-cal2-days" class="mini-cal-grid-days">
+                                <!-- Generated Dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Divider -->
+                <div class="planner-main-divider"></div>
+
+                <!-- Content Area -->
+                <div class="planner-content">
+                    <!-- Left Column: Schedule Grid -->
+                    <div class="content-left-schedule">
+                        <div class="schedule-title">Local</div>
+                        <div class="schedule-grid">
+                            <!-- Hours 7 AM to 6 PM -->
+                            <div class="schedule-row" data-hour="7">
+                                <div class="hour-label">7 <span class="ampm">AM</span></div>
+                                <div class="hour-line"></div>
+                                <div class="hour-content" id="event-slot-7"></div>
+                            </div>
+                            <div class="schedule-row" data-hour="8">
+                                <div class="hour-label">8</div>
+                                <div class="hour-line"></div>
+                                <div class="hour-content" id="event-slot-8"></div>
+                            </div>
+                            <div class="schedule-row" data-hour="9">
+                                <div class="hour-label">9</div>
+                                <div class="hour-line"></div>
+                                <div class="hour-content" id="event-slot-9"></div>
+                            </div>
+                            <div class="schedule-row" data-hour="10">
+                                <div class="hour-label">10</div>
+                                <div class="hour-line"></div>
+                                <div class="hour-content" id="event-slot-10"></div>
+                            </div>
+                            <div class="schedule-row" data-hour="11">
+                                <div class="hour-label">11</div>
+                                <div class="hour-line"></div>
+                                <div class="hour-content" id="event-slot-11"></div>
+                            </div>
+                            <div class="schedule-row" data-hour="12">
+                                <div class="hour-label">12 <span class="ampm">PM</span></div>
+                                <div class="hour-line"></div>
+                                <div class="hour-content" id="event-slot-12"></div>
+                            </div>
+                            <div class="schedule-row" data-hour="13">
+                                <div class="hour-label">1</div>
+                                <div class="hour-line"></div>
+                                <div class="hour-content" id="event-slot-13"></div>
+                            </div>
+                            <div class="schedule-row" data-hour="14">
+                                <div class="hour-label">2</div>
+                                <div class="hour-line"></div>
+                                <div class="hour-content" id="event-slot-14"></div>
+                            </div>
+                            <div class="schedule-row" data-hour="15">
+                                <div class="hour-label">3</div>
+                                <div class="hour-line"></div>
+                                <div class="hour-content" id="event-slot-15"></div>
+                            </div>
+                            <div class="schedule-row" data-hour="16">
+                                <div class="hour-label">4</div>
+                                <div class="hour-line"></div>
+                                <div class="hour-content" id="event-slot-16"></div>
+                            </div>
+                            <div class="schedule-row" data-hour="17">
+                                <div class="hour-label">5</div>
+                                <div class="hour-line"></div>
+                                <div class="hour-content" id="event-slot-17"></div>
+                            </div>
+                            <div class="schedule-row" data-hour="18">
+                                <div class="hour-label">6 <span class="ampm">PM</span></div>
+                                <div class="hour-line"></div>
+                                <div class="hour-content" id="event-slot-18"></div>
+                            </div>
+                            <!-- Extra Empty Ruled Lines for Notes / Overtime -->
+                            <div class="schedule-extra-line"></div>
+                            <div class="schedule-extra-line"></div>
+                            <div class="schedule-extra-line"></div>
+                            <div class="schedule-extra-line"></div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Tasks and Notes Boxes -->
+                    <div class="content-right-boxes">
+                        <!-- Daily Task List Box -->
+                        <div class="planner-box task-box">
+                            <div class="box-header">Daily Task List</div>
+                            <div class="task-arrange-by">Arrange by: Due Date</div>
+                            <div id="tmpl-task-list" class="task-list-container">
+                                <!-- Tasks generated dynamically -->
+                            </div>
+                        </div>
+                        
+                        <!-- Notes Box -->
+                        <div class="planner-box notes-box">
+                            <div class="box-header">Notes</div>
+                            <div class="notes-ruled-lines">
+                                <div class="note-ruled-line"></div>
+                                <div class="note-ruled-line"></div>
+                                <div class="note-ruled-line"></div>
+                                <div class="note-ruled-line"></div>
+                                <div class="note-ruled-line"></div>
+                                <div class="note-ruled-line"></div>
+                                <div class="note-ruled-line"></div>
+                                <div class="note-ruled-line"></div>
+                                <div class="note-ruled-line"></div>
+                                <div class="note-ruled-line"></div>
+                                <div class="note-ruled-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="planner-footer">
+                    <div class="footer-center">1</div>
+                    <div id="tmpl-footer-timestamp" class="footer-right">8/3/2026, 6:40 AM</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
