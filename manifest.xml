@@ -5,15 +5,15 @@
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
   <Id>05c2e1c9-3e1d-406e-9a91-e9ac64854143</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>Contoso</ProviderName>
+  <ProviderName>Sumit Waghmare</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Contoso Task Pane Add-in"/>
-  <Description DefaultValue="A template to get started."/>
+  <DisplayName DefaultValue="OneNote Daily Planner"/>
+  <Description DefaultValue="Generate a daily A5 planner page in OneNote with your Outlook calendar and Todoist tasks."/>
   <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-64.png"/>
-  <SupportUrl DefaultValue="https://www.contoso.com/help"/>
+  <SupportUrl DefaultValue="https://github.com/sumitwaghmare/ical_onenote_add_in"/>
   <AppDomains>
-    <AppDomain>https://www.contoso.com</AppDomain>
+    <AppDomain>https://sumitwaghmare.github.io</AppDomain>
   </AppDomains>
   <Hosts>
     <Host Name="Notebook"/>
@@ -75,13 +75,13 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html" />
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!" />
-        <bt:String id="CommandsGroup.Label" DefaultValue="Commands Group" />
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Show Task Pane" />
+        <bt:String id="GetStarted.Title" DefaultValue="OneNote Daily Planner" />
+        <bt:String id="CommandsGroup.Label" DefaultValue="Daily Planner" />
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Open Planner" />
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded successfully. Go to the HOME tab and click the 'Show Task Pane' button to get started." />
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
+        <bt:String id="GetStarted.Description" DefaultValue="Generate your daily A5 planner with Outlook events and Todoist tasks. Click 'Open Planner' in the HOME tab to get started." />
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open the Daily Planner task pane" />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

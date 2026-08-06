@@ -279,15 +279,13 @@ async function generatePlanner() {
         if (todoistToken) {
             writeLog("Fetching active tasks from Todoist...", "info");
             try {
-                const response = await fetch("https://api.todoist.com/api/v1/tasks", {
+                const response = await fetch("https://api.todoist.com/rest/v2/tasks", {
                     headers: {
                         "Authorization": `Bearer ${todoistToken}`
                     }
                 });
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                const data = await response.json();
-                
-                const tasks = data.results || [];
+                const tasks = await response.json();
                 writeLog(`Fetched ${tasks.length} total tasks. Filtering...`, "info");
 
                 // Filter tasks: incomplete and due today or overdue (due <= targetDateStr)
